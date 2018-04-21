@@ -8,10 +8,11 @@ public class HandSpinner : MonoBehaviour
 	private Transform _transform;
 	private Vector3 mousePosition;
 	private Vector3 screenPosition;
-  private Vector3[] prevPosition = new Vector3[10];  // nフレームの平均をとる
+  private Vector3[] prevPosition = new Vector3[5];  // nフレームの平均をとる
   private int prevPositionIndex;  // nフレームの平均をとる
   private Vector3 rotationPreset;
-  private float rotationSpeed = 1f;
+  private float rotationSpeed = 5f;
+  private float rotationReduceSpeed = 0.1f;
   private float rotationDeltaSpeed;
 
   void Start()
@@ -36,7 +37,16 @@ public class HandSpinner : MonoBehaviour
     }
     else
     {
-    	_transform.Rotate(new Vector3(0, 0, rotationDeltaSpeed) * Time.deltaTime *-1f, Space.World);
+    	_transform.Rotate(new Vector3(0, 0, rotationDeltaSpeed) * Time.deltaTime * rotationSpeed, Space.World);
+    	if(rotationDeltaSpeed>0f)
+    	{
+    		rotationDeltaSpeed -= rotationReduceSpeed;
+    	}
+    	else if(rotationDeltaSpeed<0f)
+    	{
+    		rotationDeltaSpeed += rotationReduceSpeed;
+    	}
+    	
     }
     if(prevPositionIndex >= prevPosition.Length-1)
     {
@@ -65,7 +75,6 @@ public class HandSpinner : MonoBehaviour
   	for(int i=0;i<pos.Length;i++)
   	{
   		sum += GetDiff(screenPosition, pos[i]);
-  		print(i.ToString()+" : "+GetDiff(screenPosition, pos[i]).ToString());
   	}
   	return sum/pos.Length;
   }
