@@ -5,9 +5,9 @@ using UnityEngine;
 public class HandSpinner : MonoBehaviour
 {
 
-	private Transform _transform;
-	private Vector3 mousePosition;
-	private Vector3 screenPosition;
+  private Transform _transform;
+  private Vector3 mousePosition;
+  private Vector3 screenPosition;
   private Vector3[] prevPosition = new Vector3[5];  // nフレームの平均をとる
   private int prevPositionIndex;  // nフレームの平均をとる
   private Vector3 rotationPreset;
@@ -17,7 +17,7 @@ public class HandSpinner : MonoBehaviour
 
   void Start()
   {
-  	_transform = this.transform;
+    _transform = this.transform;
   }
 
   void Update ()
@@ -37,22 +37,22 @@ public class HandSpinner : MonoBehaviour
     }
     else
     {
-    	_transform.Rotate(new Vector3(0, 0, rotationDeltaSpeed) * Time.deltaTime * rotationSpeed, Space.World);
-    	if(rotationDeltaSpeed>0f)
-    	{
-    		rotationDeltaSpeed -= rotationReduceSpeed;
-    	}
-    	else if(rotationDeltaSpeed<0f)
-    	{
-    		rotationDeltaSpeed += rotationReduceSpeed;
-    	}
-    	
+      _transform.Rotate(new Vector3(0, 0, rotationDeltaSpeed) * Time.deltaTime * rotationSpeed, Space.World);
+      if(rotationDeltaSpeed>0f)
+      {
+        rotationDeltaSpeed -= rotationReduceSpeed;
+      }
+      else if(rotationDeltaSpeed<0f)
+      {
+        rotationDeltaSpeed += rotationReduceSpeed;
+      }
+      
     }
     if(prevPositionIndex >= prevPosition.Length-1)
     {
-    	prevPositionIndex=0;
+      prevPositionIndex=0;
     }else{
-    	prevPositionIndex+=1;
+      prevPositionIndex+=1;
     }
     prevPosition[prevPositionIndex] = screenPosition;
   }
@@ -71,11 +71,11 @@ public class HandSpinner : MonoBehaviour
 
   public float GetAvgDeltaSpeed(Vector3[] pos)
   {
-  	float sum = 0f;
-  	for(int i=0;i<pos.Length;i++)
-  	{
-  		sum += GetDiff(screenPosition, pos[i]);
-  	}
-  	return sum/pos.Length;
+    float sum = 0f;
+    for(int i=0;i<pos.Length;i++)
+    {
+      sum += GetDiff(screenPosition, pos[i]);
+    }
+    return sum/pos.Length;
   }
 }

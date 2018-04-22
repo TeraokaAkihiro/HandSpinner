@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AndroidKeyEvent : MonoBehaviour {
-
-	void Start ()
-	{
-		
-	}
-	
-	void Update ()
-	{
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			Application.Quit();
-		}
-	}
+  
+  void Update ()
+  {
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+      Application.Quit();
+    }
+  }
 }
