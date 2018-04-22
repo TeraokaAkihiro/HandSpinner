@@ -23,7 +23,7 @@ public class RotationCounter : MonoBehaviour {
   }
   
   // Update is called once per frame
-  void FixedUpdate()
+  void Update()
   {
     float angleZ = _transform.eulerAngles.z;
     if(angleZ < 120f)
